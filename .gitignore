@@ -1,22 +1,22 @@
-# Entorno virtual de Python
+# Python
 .venv/
-
-# Variables privadas
-.env
-
-# Archivos temporales de Python
 __pycache__/
 *.pyc
 *.pyo
-
-# Tests / herramientas
 .pytest_cache/
 .ruff_cache/
+.coverage
+htmlcov/
 
-# Frontend 
+# Environment / secrets
+.env
+
+# Frontend
 node_modules/
 dist/
 
-# Sistema
+# IDE / OS
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
