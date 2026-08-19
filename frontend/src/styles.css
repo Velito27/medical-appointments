@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+  color: #222;
+}
+.container { max-width: 900px; margin: 30px auto; padding: 16px; }
+section { background: white; border: 1px solid #ccc; padding: 16px; margin-bottom: 16px; }
+input, select, button { padding: 8px; margin: 4px; }
+button { cursor: pointer; }
+.error { color: #b00020; }
+.success { color: #137333; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
