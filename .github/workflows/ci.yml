@@ -22,8 +22,8 @@ jobs:
 
       - run: pip install -r requirements-dev.txt
       - run: python -m compileall app
-      - run: pytest tests
-
+      - run: python -m pytest tests
+      
   frontend:
     runs-on: ubuntu-latest
 
