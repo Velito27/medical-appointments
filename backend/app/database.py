@@ -4,21 +4,24 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from app.config import settings
 
 
-database_url = URL.create(
-    drivername="postgresql+psycopg",
-    username=settings.postgres_user,
-    password=settings.postgres_password,
-    host=settings.postgres_host,
-    port=settings.postgres_port,
-    database=settings.postgres_db,
-)
-
+if settings.database_url:
+    database_url: str | URL = settings.database_url
+    database_url_text = settings.database_url
+else:
+    database_url = URL.create(
+        drivername="postgresql+psycopg",
+        username=settings.postgres_user,
+        password=settings.postgres_password,
+        host=settings.postgres_host,
+        port=settings.postgres_port,
+        database=settings.postgres_db,
+    )
+    database_url_text = database_url.render_as_string(hide_password=False)
 
 engine = create_engine(
     database_url,
     pool_pre_ping=True,
 )
-
 
 SessionLocal = sessionmaker(
     bind=engine,
@@ -33,5 +36,4 @@ class Base(DeclarativeBase):
 
 def check_database_connection() -> bool:
     with engine.connect() as connection:
-        result = connection.scalar(text("SELECT 1"))
-        return result == 1
+        return connection.scalar(text("SELECT 1")) == 1
