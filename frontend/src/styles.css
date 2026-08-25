@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #eef4f8;
-  color: #222;
+  background: #f3f7fb;
+  color: #1f2937;
 }
 
 .container {
@@ -11,35 +11,49 @@ body {
   padding: 20px;
 }
 
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 350px;
+  text-align: center;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 section {
   background: white;
   padding: 20px;
   margin-bottom: 18px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
 input, select, button {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 6px;
+  width: calc(100% - 20px);
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 8px;
 }
 
 button {
-  cursor: pointer;
   border: none;
   background: #2563eb;
   color: white;
+  cursor: pointer;
 }
 
 button:hover {
@@ -47,11 +61,11 @@ button:hover {
 }
 
 .error {
-  color: #b00020;
+  color: #b91c1c;
 }
 
 .success {
-  color: #137333;
+  color: #15803d;
 }
 
 table {
@@ -60,7 +74,6 @@ table {
 }
 
 th, td {
+  padding: 12px;
   border-bottom: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
 }
