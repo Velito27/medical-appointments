@@ -60,6 +60,16 @@ button:hover {
   opacity: 0.9;
 }
 
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+}
+
 .error {
   color: #b91c1c;
 }
