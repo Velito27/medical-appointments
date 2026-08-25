@@ -30,13 +30,20 @@ export default function Login({ setToken, setUser }: Props) {
     }
   }
 
-  return <div className="container">
-    <h1>Login</h1>
-    {error && <p className="error">{error}</p>}
-    <form onSubmit={login}>
-      <input name="email" type="email" placeholder="Correo" required />
-      <input name="password" type="password" placeholder="Contraseña" required />
-      <button>Entrar</button>
-    </form>
-  </div>;
+  return (
+    <div className="login-page">
+      <section className="login-card">
+        <h1>🏥 Medical Appointments</h1>
+        <p>Ingresa a tu cuenta</p>
+
+        {error && <p className="error">{error}</p>}
+
+        <form onSubmit={login}>
+          <input name="email" type="email" placeholder="Correo" required />
+          <input name="password" type="password" placeholder="Contraseña" required />
+          <button>Entrar</button>
+        </form>
+      </section>
+    </div>
+  );
 }
