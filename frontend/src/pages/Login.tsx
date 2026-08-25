@@ -5,9 +5,10 @@ type Props = {
   setToken: (token: string) => void;
   setUser: (user: any) => void;
   role?: string;
+  setRole?: (role: string) => void;
 };
 
-export default function Login({ setToken, setUser, role }: Props) {
+export default function Login({ setToken, setUser, role, setRole }: Props) {
   const [error, setError] = useState("");
 
   async function login(event: FormEvent<HTMLFormElement>) {
@@ -38,14 +39,18 @@ export default function Login({ setToken, setUser, role }: Props) {
   return (
     <div className="login-page">
       <section className="login-card">
-        <h1>{role ? `Acceso ${role}` : "Medical Appointments"}</h1>
+        <h1>{role === "patient" ? "Paciente" : role === "doctor" ? "Doctor" : "Administrador"}</h1>
         <p>Ingresa a tu cuenta</p>
+
         {error && <p className="error">{error}</p>}
+
         <form onSubmit={login}>
           <input name="email" type="email" placeholder="Correo" required />
           <input name="password" type="password" placeholder="Contraseña" required />
           <button>Entrar</button>
         </form>
+
+        {setRole && <button onClick={() => setRole("")}>Volver</button>}
       </section>
     </div>
   );
