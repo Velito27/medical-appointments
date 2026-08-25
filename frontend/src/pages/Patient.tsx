@@ -16,15 +16,16 @@ export default function Patient({ token, setError, setMessage }: Props) {
     api("/specialties").then(setSpecialties).catch(e => setError(e.message));
   }, []);
 
-  async function specialty(id: string) {
+  async function chooseSpecialty(id: string) {
     try {
       setDoctors(await api(`/doctors?specialty_id=${id}`));
+      setSlots([]);
     } catch (e) {
       setError((e as Error).message);
     }
   }
 
-  async function doctor(id: string) {
+  async function chooseDoctor(id: string) {
     try {
       setSlots(await api(`/doctors/${id}/availability`));
     } catch (e) {
@@ -44,16 +45,29 @@ export default function Patient({ token, setError, setMessage }: Props) {
     }
   }
 
-  return <div>
-    <h2>Reservar cita</h2>
-    <select onChange={e => specialty(e.target.value)}>
-      <option>Especialidad</option>
-      {specialties.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-    </select>
-    <select onChange={e => doctor(e.target.value)}>
-      <option>Médico</option>
-      {doctors.map(d => <option key={d.id} value={d.id}>{d.full_name}</option>)}
-    </select>
-    {slots.map(s => <div key={s.id}>{s.starts_at}<button onClick={() => reserve(s.id)}>Reservar</button></div>)}
-  </div>;
+  return <>
+    <section>
+      <h2>Reservar cita</h2>
+      <p>Selecciona una especialidad y médico disponible.</p>
+      <select onChange={e => chooseSpecialty(e.target.value)}>
+        <option value="">Especialidad</option>
+        {specialties.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+      </select>
+      <select onChange={e => chooseDoctor(e.target.value)}>
+        <option value="">Médico</option>
+        {doctors.map(d => <option key={d.id} value={d.id}>{d.full_name}</option>)}
+      </select>
+    </section>
+
+    <section>
+      <h2>Horarios disponibles</h2>
+      {slots.length === 0 && <p>No hay horarios disponibles.</p>}
+      {slots.map(s => (
+        <div className="card" key={s.id}>
+          <span>{new Date(s.starts_at).toLocaleString()}</span>
+          <button onClick={() => reserve(s.id)}>Reservar</button>
+        </div>
+      ))}
+    </section>
+  </>;
 }
