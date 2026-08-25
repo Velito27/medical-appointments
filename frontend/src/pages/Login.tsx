@@ -4,9 +4,10 @@ import { api } from "../services/api";
 type Props = {
   setToken: (token: string) => void;
   setUser: (user: any) => void;
+  role?: string;
 };
 
-export default function Login({ setToken, setUser }: Props) {
+export default function Login({ setToken, setUser, role }: Props) {
   const [error, setError] = useState("");
 
   async function login(event: FormEvent<HTMLFormElement>) {
@@ -22,6 +23,10 @@ export default function Login({ setToken, setUser }: Props) {
         })
       });
 
+      if (role && result.user?.role !== role) {
+        throw new Error("Usuario incorrecto para este acceso");
+      }
+
       localStorage.setItem("token", result.access_token);
       setToken(result.access_token);
       setUser(result.user);
@@ -33,11 +38,9 @@ export default function Login({ setToken, setUser }: Props) {
   return (
     <div className="login-page">
       <section className="login-card">
-        <h1>🏥 Medical Appointments</h1>
+        <h1>{role ? `Acceso ${role}` : "Medical Appointments"}</h1>
         <p>Ingresa a tu cuenta</p>
-
         {error && <p className="error">{error}</p>}
-
         <form onSubmit={login}>
           <input name="email" type="email" placeholder="Correo" required />
           <input name="password" type="password" placeholder="Contraseña" required />
