@@ -33,7 +33,7 @@ export default function App() {
 
   if (!user) {
     if (!role) return <Access setRole={setRole} />;
-    return <Login setToken={setToken} setUser={setUser} role={role} />;
+    return <Login setToken={setToken} setUser={setUser} role={role} setRole={setRole} />;
   }
 
   return (
