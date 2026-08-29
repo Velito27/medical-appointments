@@ -51,7 +51,7 @@ export default function App() {
 
       {user.role === "patient" && <Patient token={token} setError={setError} setMessage={setMessage} />}
       {user.role === "doctor" && <Doctor token={token} setError={setError} setMessage={setMessage} />}
-      {user.role === "admin" && <Admin token={token} setError={setError} setMessage={setMessage} />}
+      {user.role === "admin" && <Admin token={token} setError={setError} />}
     </main>
   );
 }

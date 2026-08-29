@@ -1,4 +1,6 @@
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import exists, select
 from sqlalchemy.exc import IntegrityError
@@ -13,7 +15,9 @@ from app.schemas import AppointmentResponse, AppointmentStatusUpdate, Availabili
 router = APIRouter(prefix="/doctor", tags=["Doctor dashboard"])
 
 def aware(value: datetime) -> datetime:
-    return value.replace(tzinfo=timezone.utc) if value.tzinfo is None else value.astimezone(timezone.utc)
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=ZoneInfo("America/Lima"))
+    return value.astimezone(timezone.utc)
 
 @router.get("/slots", response_model=list[AvailabilityResponse])
 def list_my_slots(include_past: bool = Query(default=False), doctor: DoctorProfile = Depends(get_current_doctor_profile), db: Session = Depends(get_db)):
