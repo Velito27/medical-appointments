@@ -60,6 +60,14 @@ button:hover {
   opacity: 0.9;
 }
 
+.register-link {
+  background: transparent;
+  color: #2563eb;
+  padding: 4px;
+  margin: 10px 0;
+  text-decoration: underline;
+}
+
 .card {
   display: flex;
   justify-content: space-between;
