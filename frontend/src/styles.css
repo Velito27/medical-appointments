@@ -529,3 +529,67 @@ tbody tr:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Acceso de administrador */
+.admin-access-button {
+  border-color: #6f5a24;
+  background: linear-gradient(180deg, #282318, #1e1b14);
+  color: #e8c968;
+  box-shadow:
+    0 8px 22px rgba(173, 130, 30, 0.1),
+    inset 0 1px 0 rgba(255, 224, 135, 0.07);
+}
+
+.admin-access-button:hover {
+  border-color: #a98936;
+  background: linear-gradient(180deg, #30291a, #242016);
+  color: #f3d77c;
+  box-shadow:
+    0 10px 26px rgba(173, 130, 30, 0.16),
+    inset 0 1px 0 rgba(255, 224, 135, 0.1);
+}
+
+.admin-login-card {
+  border-color: #4f4429;
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(207, 172, 76, 0.025),
+    inset 0 1px 0 rgba(255, 226, 145, 0.035);
+}
+
+.admin-kicker {
+  margin-bottom: 8px;
+  color: #d4af4f;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.admin-login-card h1 {
+  margin-bottom: 10px;
+}
+
+.admin-login-card input:focus {
+  border-color: #8a7131;
+  box-shadow: 0 0 0 3px rgba(212, 175, 79, 0.11);
+}
+
+.admin-submit {
+  border-color: #7b6427;
+  background: linear-gradient(180deg, #8a6f2d, #6f5822);
+  color: #fff4cc;
+  box-shadow:
+    0 8px 20px rgba(133, 100, 24, 0.2),
+    inset 0 1px 0 rgba(255, 239, 186, 0.15);
+}
+
+.admin-submit:hover {
+  border-color: #b3933f;
+  background: linear-gradient(180deg, #9a7d34, #785f25);
+  color: #fff7dc;
+  box-shadow:
+    0 10px 26px rgba(133, 100, 24, 0.28),
+    inset 0 1px 0 rgba(255, 239, 186, 0.2);
+}
