@@ -21,6 +21,7 @@ class Settings(BaseSettings):
 
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 
+    admin_username: str = "admin"
     admin_email: str = "admin@example.com"
     admin_password: str = "Admin1234!"
     seed_demo_data: bool = True
