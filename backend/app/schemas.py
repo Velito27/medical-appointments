@@ -10,6 +10,10 @@ class UserRegister(BaseModel):
 class UserLogin(UserRegister):
     pass
 
+class AdminLogin(BaseModel):
+    username: str = Field(min_length=1, max_length=80)
+    password: str = Field(min_length=1, max_length=128)
+
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
