@@ -17,7 +17,9 @@ export default function Access({ setRole, setRegistering }: Props) {
           ¿No tienes una cuenta? ¡Regístrate!
         </button>
 
-        <button onClick={() => setRole("admin")}>Administrador</button>
+        <button className="admin-access-button" onClick={() => setRole("admin")}>
+          Administrador
+        </button>
       </section>
     </div>
   );
