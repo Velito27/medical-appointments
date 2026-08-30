@@ -651,3 +651,69 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* Mostrar u ocultar contraseña */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+.password-field input {
+  padding-right: 50px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  color: #8b95a3;
+}
+
+.password-toggle:hover {
+  transform: translateY(-50%);
+  border: 0;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: none;
+  color: #d7dce4;
+}
+
+.password-toggle:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.password-toggle::after {
+  display: none;
+}
+
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.admin-login-card .password-toggle {
+  color: #9e8950;
+}
+
+.admin-login-card .password-toggle:hover {
+  color: #e4c76c;
+  background: rgba(212, 175, 79, 0.07);
+}
