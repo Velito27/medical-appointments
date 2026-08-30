@@ -16,12 +16,20 @@ export default function Login({ setToken, setUser, role, setRole }: Props) {
     const data = new FormData(event.currentTarget);
 
     try {
-      const result = await api("/auth/login", {
+      const isAdmin = role === "admin";
+      const result = await api(isAdmin ? "/auth/admin-login" : "/auth/login", {
         method: "POST",
-        body: JSON.stringify({
-          email: data.get("email"),
-          password: data.get("password")
-        })
+        body: JSON.stringify(
+          isAdmin
+            ? {
+                username: data.get("username"),
+                password: data.get("password")
+              }
+            : {
+                email: data.get("email"),
+                password: data.get("password")
+              }
+        )
       });
 
       if (role && result.user?.role !== role) {
@@ -36,18 +44,34 @@ export default function Login({ setToken, setUser, role, setRole }: Props) {
     }
   }
 
+  const isAdmin = role === "admin";
+
   return (
     <div className="login-page">
-      <section className="login-card">
+      <section className={isAdmin ? "login-card admin-login-card" : "login-card"}>
+        {isAdmin && <div className="admin-kicker">ADMIN ACCESS</div>}
+
         <h1>{role === "patient" ? "Paciente" : role === "doctor" ? "Doctor" : "Administrador"}</h1>
         <p>Ingresa a tu cuenta</p>
 
         {error && <p className="error">{error}</p>}
 
         <form onSubmit={login}>
-          <input name="email" type="email" placeholder="Correo" required />
-          <input name="password" type="password" placeholder="Contraseña" required />
-          <button>Entrar</button>
+          {isAdmin ? (
+            <input name="username" type="text" placeholder="Admin" autoComplete="username" required />
+          ) : (
+            <input name="email" type="email" placeholder="Correo" autoComplete="email" required />
+          )}
+
+          <input
+            name="password"
+            type="password"
+            placeholder={isAdmin ? "Clave" : "Contraseña"}
+            autoComplete="current-password"
+            required
+          />
+
+          <button className={isAdmin ? "admin-submit" : ""}>Entrar</button>
         </form>
 
         {setRole && <button onClick={() => setRole("")}>Volver</button>}
