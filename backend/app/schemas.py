@@ -27,6 +27,21 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user: UserResponse
 
+class LoginHistoryResponse(BaseModel):
+    id: int
+    user_id: int
+    email: EmailStr
+    role: str
+    logged_at: datetime
+
+class AdminStatsResponse(BaseModel):
+    total_users: int
+    patients: int
+    doctors: int
+    active_appointments: int
+    total_logins: int
+    logins_today: int
+
 class UserActiveUpdate(BaseModel):
     is_active: bool
 
