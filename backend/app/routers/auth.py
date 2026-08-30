@@ -5,11 +5,17 @@ from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.dependencies import get_current_user, get_db
+from app.models.login_history import LoginHistory
 from app.models.user import User
 from app.schemas import AdminLogin, TokenResponse, UserLogin, UserRegister, UserResponse
 from app.security import create_access_token, hash_password, verify_password
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
+
+
+def record_login(db: Session, user: User) -> None:
+    db.add(LoginHistory(user_id=user.id))
+    db.commit()
 
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
@@ -47,6 +53,8 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
     if not user.is_active:
         raise HTTPException(status_code=403, detail="User account is inactive")
 
+    record_login(db, user)
+
     return TokenResponse(
         access_token=create_access_token(str(user.id)),
         user=user,
@@ -70,6 +78,8 @@ def admin_login(data: AdminLogin, db: Session = Depends(get_db)):
 
     if not admin.is_active:
         raise HTTPException(status_code=403, detail="Cuenta de administrador inactiva")
+
+    record_login(db, admin)
 
     return TokenResponse(
         access_token=create_access_token(str(admin.id)),
